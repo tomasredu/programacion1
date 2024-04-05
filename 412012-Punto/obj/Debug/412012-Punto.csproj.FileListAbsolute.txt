@@ -1,0 +1,8 @@
+C:\Users\Alumno\source\repos\412012\412012-Punto\bin\Debug\412012-Punto.exe.config
+C:\Users\Alumno\source\repos\412012\412012-Punto\bin\Debug\412012-Punto.exe
+C:\Users\Alumno\source\repos\412012\412012-Punto\bin\Debug\412012-Punto.pdb
+C:\Users\Alumno\source\repos\412012\412012-Punto\obj\Debug\412012-Punto.csproj.AssemblyReference.cache
+C:\Users\Alumno\source\repos\412012\412012-Punto\obj\Debug\412012-Punto.csproj.SuggestedBindingRedirects.cache
+C:\Users\Alumno\source\repos\412012\412012-Punto\obj\Debug\412012-Punto.csproj.CoreCompileInputs.cache
+C:\Users\Alumno\source\repos\412012\412012-Punto\obj\Debug\412012-Punto.exe
+C:\Users\Alumno\source\repos\412012\412012-Punto\obj\Debug\412012-Punto.pdb
