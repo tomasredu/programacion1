@@ -1,0 +1,80 @@
+public class Persona{
+    private string nombre;
+    private int edad;
+    private string genero;
+    private double peso;
+    private double altura;
+    public string pNombre {
+        get { return nombre; }
+        set { nombre = value; }
+    }
+    public int pEdad {
+        get { return edad; }
+        set { edad = value; }
+    }
+    public string pGenero {
+        get { return genero; }
+        set { genero = value; }
+    }
+    public double pPeso {
+        get { return peso; }
+        set { peso = value; }
+    }
+    public double pAltura {
+        get { return altura; }
+        set { altura = value; }
+    }
+
+    public Persona(){
+        nombre = string.Empty;
+        edad = 0;
+        genero = string.Empty;
+        peso = 0;
+        altura = 0;
+    }
+
+    public Persona(string nombre, int edad, string genero, double peso, double altura)
+    {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.genero = genero;
+        this.peso = peso;
+        this.altura = altura;
+    }
+
+    public int calcularIMC()
+    {
+        double imc;
+        int resultado = -2;
+        
+        if (altura != 0)
+        {
+            imc = this.pPeso / this.pAltura * this.pAltura;
+            if (imc >= 20 && imc <= 25) resultado = 0;
+            else
+            {
+                if (imc < 20) resultado = -1;
+                if (imc > 25) resultado = 1;
+            }
+        }
+
+        return resultado;
+
+    }
+
+    public bool esMayorDeEdad()
+    {
+        return this.edad >= 21;
+    }
+
+    public void print()
+    {
+        Console.WriteLine(esMayorDeEdad());
+        Console.WriteLine(calcularIMC());
+    }
+}
+
+public class Program {
+    Persona Yo = new Persona("Tomas", 22, "M", 80, 1.7 );
+    
+}
