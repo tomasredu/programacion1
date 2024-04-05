@@ -69,12 +69,16 @@ public class Persona{
 
     public void print()
     {
-        Console.WriteLine(esMayorDeEdad());
-        Console.WriteLine(calcularIMC());
+        string sPersona = "Nombre: " + nombre + ", Edad: " + edad + ", Peso: " + peso + ", Altura: " + altura;
+        Console.WriteLine(sPersona);
+        Console.WriteLine("Mayor de edad: " + esMayorDeEdad());
+        Console.WriteLine("Valor IMC: " + calcularIMC());
     }
 }
 
 public class Program {
-    Persona Yo = new Persona("Tomas", 22, "M", 80, 1.7 );
+    Persona Yo = new Persona("Tomas", 22, "M", 80, 1.7 );// ojo cant parametros, orden de parametros y tipo de parametros!!
+    yo.print();
+    Console.Read();
     
 }
