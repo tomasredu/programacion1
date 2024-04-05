@@ -1,0 +1,5 @@
+//yUML
+
+[Persona|-nombre: string; -edad: int;-peso: double; -altura: double; | +Persona(); +Persona(nombre, edad, peso, altura); +calcularIMC(); +esMayorDeEdad();]
+
+[Program]<>-utiliza*>[Persona]
