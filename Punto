@@ -1,0 +1,54 @@
+//Crear proyecto de consola de .NET
+
+//Punto
+
+public class Punto
+    {
+        private double valorX;
+        private double valorY;
+
+        public double pValorX
+        {
+            get { return valorX;}
+            set { valorX = value;}
+        }
+        public double pValorY { 
+            get { return valorY;} 
+            set { valorY = value; } 
+        }
+
+        public Punto()
+        {
+            valorX = 0;
+            valorY = 0;
+        }
+        public Punto(double valorX, double valorY)
+        {
+            this.valorX = valorX;
+            this.valorY = valorY;
+        }
+
+        public double getModulo()
+        {
+            return Math.Sqrt(valorY * valorY + valorX * valorX);
+        }
+
+        public void mostrarPunto()
+        {
+            string sPunto = "(" + valorX + "," + valorY + ")";
+            Console.WriteLine(sPunto);
+        }
+}
+
+//Program
+
+public class Program
+    {
+        static void Main(string[] args)
+        {
+            Punto punto = new Punto(3.8,5.3);
+            punto.mostrarPunto();
+            Console.WriteLine(punto.getModulo());
+            Console.Read();
+        }
+    }
