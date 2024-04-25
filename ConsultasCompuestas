@@ -1,0 +1,111 @@
+--25.Listado de clientes mostrando apellido, nombre y barrio al que pertenece.
+select C.NOMBRE + ' '+ APELLIDO 'Nombre y Apellido', B.NOMBRE 'Nombre barrio'
+	from CLIENTES as C, BARRIOS as B
+	where C.COD_BARRIO = B.COD_BARRIO
+
+--23.Listado de clientes mostrando apellido y nombre, calle y número.
+
+select C.NOMBRE +  + C.APELLIDO 'Nombre Cliente',
+CA.NOMBRE 'Calle' ,  C.ALTURA 'Numero'
+	from CLIENTES as C, CALLES as CA
+	where C.COD_CALLE = CA.COD_CALLE
+
+--24.Listado de clientes mostrando apellido, nombre y localidad a la que pertenece.
+
+select C.APELLIDO + ', ' + C.NOMBRE 'Apellido y nombre', L.NOMBRE  
+	from CLIENTES as C, LOCALIDADES as L
+	where C.COD_LOCALIDAD = L.COD_LOCALIDAD
+
+
+--26.Listar todas las facturas abonadas en efectivo, ordenada por código de cliente.
+
+select F.NRO_FACTURA 'Numero de factura', F.FECHA, FP.DESCRIPCION, C.APELLIDO + ', ' + C.NOMBRE 'Apellido y nombre'
+from FACTURAS as F, FORMAS_PAGO as FP, CLIENTES as C
+where F.COD_FORMA_PAGO = FP.COD_FORMA_PAGO and 
+FP.DESCRIPCION like 'EFECTIVO' and
+F.COD_CLIENTE = C.COD_CLIENTE
+order by F.COD_CLIENTE
+
+--27.Listar todas plantas donde el tipo de planta sea Flores
+
+select P.DESCRIPCION , TP.NOMBRE
+from PLANTAS as P, TIPOS_PLANTAS as TP
+where P.COD_TIPO_PLANTA = TP.COD_TIPO_PLANTA and TP.NOMBRE = 'Flores'
+
+--28.Listar todos los clientes cuya localidad sea Jesús María.
+
+select C.NOMBRE + ' '+ C.APELLIDO, L.NOMBRE
+from CLIENTES as C, LOCALIDADES as L
+where C.COD_LOCALIDAD = L.COD_LOCALIDAD and L.NOMBRE = 'Jesús María'
+
+--29.Listar todos los registros completos de clientes cuyo IVA sea igual a MONOTRIBUTISTA, ordenado por localidad.
+
+select *, IVA.DESCRIPCION
+from CLIENTES as C, CONDICIONES_IVA as IVA, LOCALIDADES as L
+where C.COD_CONDICION_IVA = IVA.COD_CONDICION_IVA and IVA.DESCRIPCION = 'MONOTRIBUTISTA' and C.COD_LOCALIDAD = L.COD_LOCALIDAD
+order by L.NOMBRE
+
+--30.Listar todos los datos de los clientes que viven en la localidad de Córdoba o su apellido comience con la letra ‘A’.
+select *
+from CLIENTES as C, LOCALIDADES as L
+where C.COD_LOCALIDAD = L.COD_LOCALIDAD 
+--and L.NOMBRE like 'C_RDOBA' 
+--and C.APELLIDO like 'A%'
+and C.COD_LOCALIDAD = L.COD_LOCALIDAD
+order by L.NOMBRE
+
+--31. Listar clientes que viven en la localidad de CARLOS PAZ, ALTA GRACIA y ADELIA MARIA.
+
+select C.NOMBRE + ' '+ C.APELLIDO, L.NOMBRE
+from CLIENTES as C, LOCALIDADES as L
+where C.COD_LOCALIDAD = L.COD_LOCALIDAD 
+and (L.NOMBRE like 'JESÚS MARÍA' OR L.NOMBRE like 'CARLOS PAZ' or L.NOMBRE like 'ADELIA MARÍA')
+
+--32.Mostrar todos los clientes que no viven en las localidades de AREQUITO, CORDOBA y MERLO.
+select C.NOMBRE + ' '+ C.APELLIDO, L.NOMBRE
+from CLIENTES as C, LOCALIDADES as L
+where C.COD_LOCALIDAD = L.COD_LOCALIDAD 
+and not(L.NOMBRE  like 'AREQUITO' or L.NOMBRE like 'CÓRDOBA' or L.NOMBRE  like 'MERLO')
+
+select C.NOMBRE + ' '+ C.APELLIDO, L.NOMBRE
+from CLIENTES as C, LOCALIDADES as L
+where C.COD_LOCALIDAD = L.COD_LOCALIDAD 
+and (L.NOMBRE not like 'AREQUITO' and L.NOMBRE not like 'CÓRDOBA' and L.NOMBRE  not like 'MERLO')
+
+--33.Mostrar nombre, apellido y barrio de los clientes de Cba. Capital o de
+--aquellos cuyos apellidos no comiencen con letras de la ‘D’ a la ‘P’. Ordenar
+--por barrio.
+
+select C.NOMBRE + ' '+ C.APELLIDO, B.NOMBRE ,L.NOMBRE
+from CLIENTES as C, LOCALIDADES as L, BARRIOS as B
+where C.COD_LOCALIDAD = L.COD_LOCALIDAD 
+and C.COD_BARRIO = B.COD_BARRIO
+and not(C.APELLIDO  like 'D%' or C.APELLIDO like 'P%')
+order by B.NOMBRE
+
+--34.Listar el detalle de la factura calculando la cantidad por el precio.
+
+select DF.NRO_FACTURA, PL.DESCRIPCION, PL.PRECIO, DF.CANTIDAD, DF.CANTIDAD * PL.PRECIO 'TOTAL' 
+from DETALLES_FACTURAS as DF, PLANTAS as PL
+where DF.COD_PLANTA = PL.COD_PLANTA
+
+select * from PLANTAS
+select * from DETALLES_FACTURAS
+
+--35.Listar todos los clientes que vivan en provincias que comiencen con 'Co' y que sean CONSUMIDOR FINAL.
+select C.NOMBRE + ' '+ C.APELLIDO, P.NOMBRE
+from CLIENTES as C, PROVINCIAS as P, CONDICIONES_IVA as IVA
+where C.COD_PROVINCIA = P.COD_PROVINCIA 
+and C.COD_CONDICION_IVA = IVA.COD_CONDICION_IVA
+and P.NOMBRE like 'Co%' and IVA.DESCRIPCION like 'CONSUMIDOR FINAL'
+
+--36.Listar todos los clientes que viven en barrio General Paz, Centro y que además posean teléfono.
+select C.NOMBRE + ' '+ C.APELLIDO, B.NOMBRE, C.TELEFONO
+from CLIENTES as C, BARRIOS as B
+where C.COD_BARRIO = B.COD_BARRIO 
+and (B.NOMBRE like 'General Paz' or B.NOMBRE like 'Centro')
+and C.TELEFONO is not null
+
+select C.NOMBRE + ' '+ C.APELLIDO, B.NOMBRE, C.TELEFONO
+from CLIENTES as C, BARRIOS as B
+where C.COD_BARRIO = B.COD_BARRIO 
