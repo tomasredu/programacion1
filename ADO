@@ -1,0 +1,3 @@
+SQL -- Lenguaje
+SQL Server -- SGDB (motor)
+SQL Server Management -- App // A este nivel hacemos apps nosotros
