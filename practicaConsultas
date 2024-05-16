@@ -1,0 +1,138 @@
+use LIBRERIA
+
+
+select c.ape_cliente, bc.barrio, v.ape_vendedor, bv.barrio
+from barrios bc join clientes c on bc.cod_barrio = c.cod_barrio
+join facturas f on f.cod_cliente = c.cod_cliente
+join vendedores v on f.cod_vendedor = v.cod_vendedor
+join barrios bv on v.cod_barrio = bv.cod_barrio
+
+
+--los barrios de cada cliente y de cada vendedor
+select cod_barrio,ape_cliente from clientes order by 1
+select cod_barrio,ape_vendedor from vendedores order by 1
+
+--hacemos un inner join
+select ape_cliente,c.cod_barrio,v.cod_barrio,ape_vendedor
+from clientes c join vendedores v on c.cod_barrio = v.cod_barrio
+order by 2
+--nos da los clientes y vendedores que comparten barrio
+
+--todos los clientes y solo los vendedores que viven en el mismo barrio que los clientes
+select ape_cliente,c.cod_barrio,v.cod_barrio,ape_vendedor
+from clientes c left join vendedores v on c.cod_barrio = v.cod_barrio
+order by 2
+
+--todos los vendedores y solo los clientes que viven en el mismo barrio que los vendedores
+select ape_cliente,c.cod_barrio,v.cod_barrio,ape_vendedor, b.barrio Barrio
+from 
+clientes c right join vendedores v on c.cod_barrio = v.cod_barrio
+join barrios b on v.cod_barrio = b.cod_barrio
+--from vendedores v left join clientes c on c.cod_barrio = v.cod_barrio
+order by 3
+
+--listado de clientes y vendedores que viven en el mismo barrio
+select ape_cliente,c.cod_barrio,v.cod_barrio,ape_vendedor
+from clientes c full join vendedores v 
+on c.cod_barrio = v.cod_barrio
+order by 2
+
+--listado de clientes y vendedores que viven en el mismo barrio + nombre de barrio
+select ape_cliente,c.cod_barrio,bc.barrio,bv.barrio,v.cod_barrio,ape_vendedor
+from barrios bc join clientes c on bc.cod_barrio=c.cod_barrio
+full join vendedores v  join barrios bv on bv.cod_barrio = v.cod_vendedor
+on c.cod_barrio = v.cod_barrio
+order by 2
+
+--LIste los datos de facturacion correspondientes
+--al año en curso
+
+select f.nro_factura, fecha, descripcion, d.pre_unitario * cantidad
+from facturas f join detalle_facturas as d
+on f.nro_factura = d.nro_factura join articulos a
+on a.cod_articulo = d.cod_articulo
+where datediff(year,fecha, YEAR) = 0
+order by fecha desc
+
+--LIste los datos de facturacion correspondientes
+--al año anterior
+
+select f.nro_factura, fecha, descripcion, d.pre_unitario * cantidad
+from facturas f join detalle_facturas as d
+on f.nro_factura = d.nro_factura join articulos a
+on a.cod_articulo = d.cod_articulo
+where datediff(year,fecha, GETDATE()) = 1
+order by fecha desc
+
+--LIste los datos de facturacion correspondientes
+--al año anterior
+select f.nro_factura, fecha, descripcion, d.pre_unitario * cantidad
+from facturas f join detalle_facturas as d
+on f.nro_factura = d.nro_factura join articulos a
+on a.cod_articulo = d.cod_articulo
+where YEAR(dateadd(year,-1, GETDATE())) = YEAR(fecha)
+order by fecha desc
+
+--LIste los datos de facturacion correspondientes
+--al mes actual
+
+select f.nro_factura, fecha, descripcion, d.pre_unitario * cantidad
+from facturas f join detalle_facturas as d
+on f.nro_factura = d.nro_factura join articulos a
+on a.cod_articulo = d.cod_articulo
+--where MONTH(fecha) = MONTH(getdate()) and year(fecha) = year(getdate())
+where datediff(month,fecha,getdate()) = 0
+order by fecha desc
+
+--LIste los datos de facturacion correspondientes
+--al mes anterior
+select f.nro_factura, fecha, descripcion, d.pre_unitario * cantidad
+from facturas f join detalle_facturas as d
+on f.nro_factura = d.nro_factura join articulos a
+on a.cod_articulo = d.cod_articulo
+--where MONTH(fecha) = MONTH(getdate()) and year(fecha) = year(getdate())
+--where datediff(month,fecha,getdate()) = 1
+where month(fecha) = month(dateadd(month, -1, getdate()))
+order by fecha desc
+
+--ejs 4 y 7
+-- Emita un listado con los datos del vendedor y las ventas que ha realizado
+--el año pasado. Muestre los vendedores aun así no tengan ventas
+--registradas en el año solicitado.
+
+select * from vendedores
+select * from facturas where datediff(year, fecha, getdate()) = 1
+select * from facturas
+
+select v.ape_vendedor + ' '+  v.nom_vendedor as 'Nombre completo', f.nro_factura, fecha
+from vendedores v left join facturas f
+on v.cod_vendedor = f.cod_vendedor and (YEAR(fecha) = YEAR(getdate())-1 or fecha is null)
+order by fecha
+
+SELECT V.COD_VENDEDOR,
+ V.APE_VENDEDOR + ' '+ V.NOM_VENDEDOR 'VENDEDOR',
+ F.NRO_FACTURA,
+ F.FECHA
+ FROM VENDEDORES V
+ LEFT JOIN FACTURAS F ON V.COD_VENDEDOR = F.COD_VENDEDOR
+ AND YEAR(F.FECHA) = YEAR(GETDATE())-1
+
+
+
+
+
+--. Liste código de cliente, nombre, fecha y factura para las ventas del año 2007
+-- Muestre los clientes hayan comprado o no en ese año.
+
+select c.cod_cliente, c.nom_cliente, f1.fecha, f1.nro_factura
+from clientes c left join facturas f1 
+on c.cod_cliente = f1.cod_cliente
+where YEAR(f1.fecha) = 2007 or f1.fecha is null
+order by 1
+
+--o
+
+select c.cod_cliente, c.nom_cliente, f1.fecha, f1.nro_factura
+from clientes c left join facturas f1 
+on c.cod_cliente = f1.cod_cliente and YEAR(f1.fecha) = 2007 
+order by 1
