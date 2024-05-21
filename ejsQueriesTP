@@ -1,0 +1,41 @@
+Ideas para Consultas
+
+Barrios de clientes que hayan comprado un producto en particular
+Pedidos de un cliente con nombre "" y con metodo de pago ""
+Pedidos con estado Pendiete cuyo repartidor sea ""
+Direcciones de todos los empleados que vivan en "ciudad"
+Movimientos de stock de un producto hechos en el ultimo mes
+
+
+Facturas con Vendedor y cliente - Años
+Facturas, articulos y vendedor - Mes pasado
+Vendedor y Facturas - Año pasado
+Articulos de detalles Factura
+Facturas Vend Cliente Detalles - Mes especifico y año especifico - Articulo con letra
+Clientes con sus facturas - Año
+Articulos comprados por un cliente
+Articulos comprados  - Clientes que empiecen con letra
+
+Datos cliente - Letras
+Datos vendedores - Letra/Fecha Nac/Ventas no nulas
+Facturas - Rango Fechas / Cod Vendedor
+Articulos - Cod==/Precio>=
+Articulos - stock/precio/descripcion letras
+vendedores - mes nac
+factura y vendedor - cliente cod rango
+factura cliente vendedor - rango fechas y letra
+factura, articulo, importe - valore fecha/ descripcion letra
+articulos vendidos - precio unitario
+factura, cliente, vendedor articulo - clientes con contacto/importe superior a250
+cliente barrio vendedor - nro factura valores
+articulos vendidos - nro factura rango
+facturas - clientes letras/descripciones articulos patron
+articulos vendidos - año actual
+clientes y vendedores articulos - año pasado/edad vendedor
+facturas - precio articulo rango / vendedores letras rango
+clientes, articulos, gasto- compra enero
+articulos vendidos, precio historico y actual - año==/
+vendedores vendieron - fecha factura == / apellidos letra
+articulos - precio histoico>valor
+
+
