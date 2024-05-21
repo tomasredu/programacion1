@@ -201,7 +201,6 @@ create table movimientos_stock(
 );
 
 
-
 create table pedidos(
 	id_pedido int identity(1, 1),
 	id_cliente int not null,
@@ -209,25 +208,29 @@ create table pedidos(
 	id_sucursal int not null,
 	id_encargado int not null,
 	id_viaje int,
+	id_direccion int,
 	id_estado int,
 	hora_emision datetime not null,
 	hora_partida datetime,
 	hora_entrega datetime
 
-	constraint pk_pedidos primary key (id_pedido),
-	constraint fk_pedidos_cliente foreign key(id_cliente)
+	constraint pk_pedido primary key (id_pedido),
+	constraint fk_pedido_cliente foreign key(id_cliente)
 		references clientes(id_cliente),
-	constraint fk_pedidos_forma_pago foreign key(id_forma_pago)
+	constraint fk_pedido_forma_pago foreign key(id_forma_pago)
 		references formas_pago(id_forma_pago),
-	constraint fk_pedidos_sucursal foreign key(id_sucursal)
+	constraint fk_pedido_sucursal foreign key(id_sucursal)
 		references sucursales(id_sucursal),
-	constraint fk_pedidos_encargado foreign key(id_encargado)
+	constraint fk_pedido_encargado foreign key(id_encargado)
 		references encargados(id_encargado),
-	constraint fk_pedidos_viaje foreign key(id_viaje)
+	constraint fk_pedido_viaje foreign key(id_viaje)
 		references viajes(id_viaje),
+	constraint fk_pedido_direccion foreign key(id_direccion)
+		references direcciones(id_direccion),
 	constraint fk_pedidos_estado foreign key(id_estado)
 		references estados_pedido(id_estado_pedido),
 );
+
 
 
 create table det_pedidos(
