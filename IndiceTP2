@@ -1,0 +1,69 @@
+		('Luciana', 'Castillo', 30249876, 4, '15/08/1990'),1
+		('Facundo', 'Luna', 29453768, 1, '03/06/1985'),2
+		('Valentina', 'Sosa', 28761983, 3, '22/10/1980'),3
+		('Maximiliano', 'Giménez', 29973456, 5, '10/04/1982'),4
+		('Marcela', 'Ríos', 27684539, 2, '28/12/1975'),5
+		('Gonzalo', 'Vargas', 28874621, 1, '17/09/1978'),6
+		('Camila', 'Molina', 30987564, 3, '05/03/1995'),7
+		('Ezequiel', 'Moreno', 29386574, 2, '12/07/2000'),8
+		('Julieta', 'Ferrari', 30754986, 5, '19/11/1972'),9
+		('Matías', 'Peralta', 28469573, 4, '07/01/1993'),10
+		('Agustín', 'Soria', 29874651, 4, '15/08/1990'),11
+		('Sofía', 'Vega', 29487563, 1, '03/06/1985'),12
+		('Joaquín', 'Herrera', 28795468, 3, '22/10/1980'),13
+		('Camila', 'Fernández', 29984756, 5, '10/04/1982'),14
+		('Lucas', 'Pereyra', 27659874, 2, '28/12/1975'),15
+		('Valentina', 'Bustos', 28876543, 1, '17/09/1978'),16
+		('Mateo', 'Ferreyra', 30987465, 3, '05/03/1995'),17
+		('Martina', 'Sosa', 29387654, 2, '12/07/2000'),18
+		('Gabriela', 'López', 28875649, 5, '19/11/1972'),19
+		('Pablo', 'Rojas', 30784563, 4, '07/01/1993')20
+
+		('Alto Alberdi'),1 /id barrio 	4
+1 - 5 Cba	('Cerro'),2			14	
+		('Nueva Córdoba'),3		7
+6-10 Ros	('Jardín'),4			13
+		('Centro'),5			5
+		('Fisherton'),6			20
+		('Abasto'),7			19
+		('Belgrano'),8			23
+		('Alberdi'),9			16
+		('Azcuénaga')10			21
+
+		('Buenos Aires 1436',1,1,NULL,NULL,NULL), 1
+		('Colón 1520',13,2,NULL,NULL,NULL),2
+		('San Jerónimo 520',5,3,NULL,NULL,NULL),3
+		('Chacabuco 1254',4,4,NULL,NULL,NULL),4
+		('Laprida 993',7,5,NULL,NULL,NULL),5
+
+		('Avellaneda 2002',21,6,NULL,NULL,NULL),6
+		('Presidente Perón 3145',24,7,NULL,NULL,NULL),7
+		('Oroño 1510',18,8,NULL,NULL,NULL), 8
+		('Catamarca 3100 ',22,9,NULL,NULL,NULL), 9
+		('27 de Febrero 440',19,9,NULL,NULL,NULL), 10
+
+		('Pellegrini 150',12,10,NULL,NULL,NULL), 11
+		('San Juan 527',7,5,NULL,NULL,NULL) 12
+
+
+		('Efectivo'),1
+		('Débito'),2
+		('Crédito'),3
+		('Transferencia'),4
+		('Vale')5
+
+  
+    Direcciones Repartidores
+	1	('Deán Funes 450',1,NULL,1,NULL,NULL),  	CBA
+	2	('Vélez Sarsfield 2902',3,NULL,2,NULL,NULL),	CBA
+	3	('Sucre 814',8,NULL,3,NULL,NULL),		CBA
+	4	('Los granaderos 1744',7,NULL,4,NULL,NULL),	CBA
+	5	('General Paz 3412',12,NULL,5,NULL,NULL),	CBA
+
+	6	('San Lorenzo 911',1,NULL,6,NULL,NULL),		ROS
+	7	('Entre Ríos 212',3,NULL,7,NULL,NULL),		ROS
+	8	('Oroño 340',8,NULL,8,NULL,NULL),		ROS
+
+	9	('Sarmiento 15',34,NULL,9,NULL,NULL),		VLB
+	10	('Sarmiento 15',34,NULL,10,NULL,NULL),		VLB
+	11	('Rafael Lozada 314',28,NULL,10,NULL,NULL)	AG
