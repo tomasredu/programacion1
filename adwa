@@ -1,0 +1,166 @@
+--resoluciones guia de funciones de agregado y consultas group by
+
+ejecucion de sentenci secuel
+from
+where
+
+group by divide una consulta sumaria o agrupa una consulta simple
+having cond de busqueda sobre resultado de order by
+
+select
+order by
+
+
+use LIBRERIA_LCI
+set dateformat dmy
+/*
+select nro_factura, SUM(cantidad * pre_unitario) 'Monto total'
+from detalle_facturas
+group by nro_factura
+*/
+select SUM(cantidad * pre_unitario) 'Monto total', month(fecha)
+from detalle_facturas df join facturas f on f.nro_factura = df.nro_factura
+where DATEDIFF(year, f.fecha, GETDATE()) = 2
+group by month(fecha)
+order by month(fecha)
+
+/*1.4 Se quiere saber la cantidad de ventas que hizo 
+el vendedor de código 3
+*/
+
+select COUNT (*) 'Ventas 3'
+from facturas
+where cod_cliente = 3
+
+/*
+1.5 Resolver la misma consulta anterior, pero no por el código sino por el
+nombre ‘Alejandro’ y apellido ‘Lopez’ del vendedor.
+*/
+select COUNT (*) 'Ventas Alejandro Lopez'
+from facturas f join clientes c on f.cod_cliente = c.cod_cliente
+where c.nom_cliente like 'Alejandro' and c.ape_cliente like 'Lopez'
+
+
+/*
+1.6 ¿Cuál fue la fecha de la primera y última venta que se realizó en este
+negocio?
+*/
+
+select MAX(fecha) 'Fecha más reciente', MIN(fecha) 'Fecha más antigua'
+from facturas f
+
+/*
+1.7 Mostrar la siguiente información respecto a la factura Nro.: 450: cantidad
+total de unidades vendidas, la cantidad de artículos diferentes vendidos y
+el importe total.
+*/
+
+select sum(cantidad) 'Total unidades vendidas',
+count(*) 'Cantidad de articulos vendidos',
+sum(pre_unitario * cantidad) 'Importe total'
+from detalle_facturas df
+where nro_factura = 450
+
+
+/*
+1.8 ¿Cuál fue la cantidad total de unidades vendidas, importe total y el importe
+promedio para vendedores cuyos nombres comienzan con letras que van
+de la “d” a la “l”?
+*/
+select sum(cantidad) 'Total unidades vendidas',
+avg(pre_unitario * cantidad) 'Promedio'
+from detalle_facturas df 
+join facturas f on df.nro_factura = f.nro_factura
+join clientes c on c.cod_cliente = f.cod_cliente
+where c.nom_cliente like '[d-f]%'
+
+select df.nro_factura, pre_unitario * cantidad 'Monto'
+from detalle_facturas df 
+join facturas f on df.nro_factura = f.nro_factura
+join clientes c on c.cod_cliente = f.cod_cliente
+where c.nom_cliente like '[d-f]%'
+group by df.nro_factura, pre_unitario * cantidad 
+
+/*
+1.9 Se quiere saber el importe total vendido, el promedio del importe vendido
+y la cantidad total de artículos vendidos para el cliente Roque Paez.
+
+*/
+
+select sum(pre_unitario *cantidad) 'Importe total vendido',
+avg(pre_unitario * cantidad) 'Promedio de importe vendido',
+sum(cantidad) 'Cantidad de articulos vendidos'
+from detalle_facturas df 
+join facturas f on df.nro_factura = f.nro_factura
+join clientes c on c.cod_cliente = f.cod_cliente
+where c.nom_cliente + ' ' + c.ape_cliente like 'Roque Paez'
+
+/*
+1.10 Mostrar la fecha de la primera venta, la cantidad total vendida y el importe
+total vendido para los artículos que empiecen con “C”.
+*/
+
+select max(f.fecha) 'Primera fecha', sum(cantidad) 'Total cantidad', sum(df.pre_unitario * cantidad)'Importe Total'
+from detalle_facturas df 
+join facturas f on df.nro_factura = f.nro_factura
+join articulos a on df.cod_articulo = a.cod_articulo
+where a.descripcion like 'C%'
+
+/*
+1.11 Se quiere saber la cantidad total de artículos vendidos y el importe total
+vendido para el periodo del 15/06/2011 al 15/06/2017.
+
+*/
+
+select sum(cantidad) 'Cantidad total', sum(pre_unitario * cantidad) 'Importe total'
+from detalle_facturas df
+join facturas f on f.nro_factura = df.nro_factura 
+where f.fecha between '15/06/2011' and '15/06/2017'
+
+/*
+1.12 Se quiere saber la cantidad de veces y la última vez que vino el cliente de
+apellido Abarca y cuánto gastó en total.
+*/
+
+select count(distinct f.nro_factura) 'Facturas', max(fecha) 'Fecha reciente' 
+, sum(cantidad * pre_unitario) 'Monto total'
+from facturas f
+join clientes c on f.cod_cliente = c.cod_cliente
+join detalle_facturas df on f.nro_factura = df.nro_factura
+where c.ape_cliente like 'Abarca'
+select * from clientes
+
+/*
+1.13 Mostrar el importe total y el promedio del importe para los clientes cuya
+dirección de mail es conocida
+*/
+
+select sum(cantidad * pre_unitario)'Importe total', avg(cantidad * pre_unitario)'Promedio imprte'
+from detalle_facturas df
+join facturas f on df.nro_factura = f.nro_factura
+join clientes c on c.cod_cliente = f.cod_cliente
+where c.[e-mail] is not null
+
+/*
+1.14 Obtener la siguiente información: el importe total vendido y el importe
+promedio vendido para números de factura que no sean los siguientes: 13,
+5, 17, 33, 24.
+
+*/
+select sum(cantidad * pre_unitario)'Importe total', avg(cantidad * pre_unitario)'Promedio imprte'
+from detalle_facturas df
+join facturas f on df.nro_factura = f.nro_factura
+where f.nro_factura not in(13,5,17,35,24)
+
+--EJERCICIOS DE GROUP BY
+/*
+2.4 Emitir un listado de la cantidad de facturas confeccionadas diariamente,
+correspondiente a los meses que no sean enero, julio ni diciembre. Ordene
+por la cantidad de facturas en forma descendente y fecha.
+*/
+
+select trim(SPACE(1) from str(day(fecha)) +'/'+ str(month(fecha))+'/'+str(year(fecha)))'Fecha' ,count(*) 'Cantidad de facturas'
+from facturas f
+where month(f.fecha) not in(1,7,12)
+group by day(fecha), month(fecha),year(fecha)
+order by year(fecha), month(fecha), day(fecha)
