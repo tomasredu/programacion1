@@ -1,0 +1,45 @@
+create procedure sp_traer_repartidores
+as
+select r.*, b.id_ciudad idBarrio, b.nombre Barrio,
+		c.id_ciudad idCiudad, c.nombre Ciudad,
+        p.id_provincia idProvincia, p.nombre Provincia,
+        td.id_tipo_documento idTipo, td.descripcion Tipo 
+
+from Repartidores r join Barrios b on r.id_barrio = b.id_barrio 
+
+join Ciudades c on c.id_ciudad = b.id_ciudad 
+join Provincias p on p.id_provincia = c.id_provincia 
+join Tipos_Documento td on td.id_tipo_documento = r.id_tipo_documento
+
+
+execute sp_traer_repartidores
+go
+alter proc sp_insertar_repartidor
+@nombre varchar(50),
+@apellido varchar(50),
+@documento int,
+@id_tipo_documento int,
+@fecha_nac datetime,
+@direccion varchar(50),
+@id_barrio int
+as
+insert into repartidores(nombre,apellido,documento,id_tipo_documento,fecha_nac, direccion, id_barrio)
+values(@nombre,@apellido,@documento,@id_tipo_documento,@fecha_nac,@direccion,@id_barrio)
+
+go
+
+create proc sp_pedido_entre_fechas
+@fecha1 datetime = '13/06/2024',
+@fecha2 datetime = '21/05/2024'
+as
+
+select p.id_pedido, c.nombre, s.descripcion, p.hora_emision
+from pedidos p join clientes c on p.id_cliente = c.id_cliente
+join sucursales s on s.id_sucursal = p.id_sucursal
+where p.hora_emision between @fecha2 and @fecha1
+go
+
+exec sp_insertar_repartidor 'Agustin', 'Murua', 1121241, 2, '12/03/1999', 'Hola 234', 3
+
+select * from repartidores
+go
