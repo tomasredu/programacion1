@@ -543,7 +543,7 @@ namespace TP3.Presentacion
         private void txtApellido_Validated(object sender, EventArgs e)
         {
             
-            this.errNombre.SetError(txtApellido, "");
+            this.errApellido.SetError(txtApellido, "");
             //MessageBox.Show("Validado");
 
 
@@ -586,8 +586,8 @@ namespace TP3.Presentacion
             if(!esFechaValida(dtpFechaNacimiento.Value,out err))
             {
                 e.Cancel=true;
-                dtpFechaNacimiento.Select();
-                this.errTipo.SetError(dtpFechaNacimiento, err);
+                //dtpFechaNacimiento.Select();
+                this.errFecha.SetError(dtpFechaNacimiento, err);
             }
         }
 
