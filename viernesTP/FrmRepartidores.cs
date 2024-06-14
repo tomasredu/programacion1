@@ -111,20 +111,41 @@ namespace TP3.Presentacion
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            if((Repartidor)dgvRepartidores.SelectedRows[0].DataBoundItem != null)
+            {
             Form fd = new FormDetalles(Modo.Editar, (Repartidor)dgvRepartidores.SelectedRows[0].DataBoundItem);
             fd.ShowDialog();
+
+            }
+            else{
+            MessageBox.Show("Seleccione un repartidor de la grilla");
+            }
+            
         }
 
         private void btnDetalle_Click(object sender, EventArgs e)
         {
+        
+            if((Repartidor)dgvRepartidores.SelectedRows[0].DataBoundItem != null){
             Form fd = new FormDetalles(Modo.Detalle, (Repartidor)dgvRepartidores.SelectedRows[0].DataBoundItem);
             fd.ShowDialog();
+            }
+            else{
+            MessageBox.Show("Seleccione un repartidor de la grilla");
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Form fd = new FormDetalles(Modo.Eliminar, (Repartidor)dgvRepartidores.SelectedRows[0].DataBoundItem);
+        
+            if((Repartidor)dgvRepartidores.SelectedRows[0].DataBoundItem != null){
+            Form fd = new FormDetalles(Modo.Detalle, (Repartidor)dgvRepartidores.SelectedRows[0].DataBoundItem);
             fd.ShowDialog();
+            else{
+            MessageBox.Show("Seleccione un repartidor de la grilla");
+            }
+            
         }
 
         private void cboProvincia_SelectedIndexChanged_1(object sender, EventArgs e)
